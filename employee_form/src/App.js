@@ -1,12 +1,36 @@
 import React from 'react';
-import './App.css';
+import { connect } from 'react-redux'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-function App() {
+import './App.css';
+import ValidateLoginForm from './components/ValidateLoginForm';
+import EmployeeTable from './components/EmployeeTable';
+import PrivateRoute from './containers/PrivateRoute'
+
+function App(props) {
+  console.log(props.validUser)
   return (
-    <div className="App">
-     
-    </div>
-  );
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <ValidateLoginForm />
+        </Route>
+        <PrivateRoute validUser = {props.validUser} path="/employeeData" >
+            <EmployeeTable />
+        </PrivateRoute>
+      </Switch>
+    </Router>
+  )
 }
 
-export default App;
+const mapStateToProps = state => {
+  return{
+      validUser : state.user.isValidUser
+  }
+}
+
+export default connect(mapStateToProps)(App)
+
+
+
+
