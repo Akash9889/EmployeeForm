@@ -11,21 +11,23 @@ import {validationSchema} from '../containers/ValidationSchema'
 const ValidateLoginForm =(props) => {
     let history = useHistory();
     let location = useLocation();
-
+    
     let { from } = location.state || { from: { pathname: "/employeeData" } };
     let login = () => {
-        console.log(history)
         if(!props.validUser){
             history.replace(from);
         }
     };
 
     return(
-
+        <>
+        {/* serverside login error fail */}
+         { props.loginFailed ? <p className = 'login-error'>Invalid Credentials!!</p>: null}
         <Formik
             initialValues = {{email :'', password :''}}
             onSubmit={ async (values, {setSubmitting, resetForm}) => {
                 setSubmitting(true)
+                //call for validating user credentials
                 await props.validateUser(values)
                
                 setSubmitting(false)
@@ -82,17 +84,20 @@ const ValidateLoginForm =(props) => {
                         )}
 
                         <button type ='submit' disabled={isSubmitting}>Submit </button>
+                       
                     </form>    
                 )
             }}
         </Formik>
+        </>
     )
 }
 
 const mapStateToProps = state => {
-    console.log(state.user.isValidUser)
+    console.log(state.user)
     return{
-        validUser : state.user.isValidUser
+        validUser : state.user.isValidUser,
+        loginFailed : state.user.loginError
     }
   }
 

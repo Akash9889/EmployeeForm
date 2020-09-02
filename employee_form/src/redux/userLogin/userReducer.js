@@ -3,30 +3,27 @@ import {validUsersList} from '../../utils/validUsers'
 
 
 const initialState = {
-    isValidUser: false
+    isValidUser: false,
+    loginError: null
 }
 
-//console.log(validUsersList)
+
 const userReducer = ( state = initialState, action ) => {
     switch(action.type){
        
         case USER_AUTHENTICATOR : {
-            //console.log(action.payload)
             const {email, password} = action.payload
+            //checking authenticity of user in the JSON file
             const isValidUser = validUsersList.some((user) => user.username === email && user.password === password )
-            //validUsersList.map(user => console.log(user))
-            // validUsersList.some((user) => user.username == email && user.password == password )
-           // console.log(isValidUser)
-            return {
+            //setting error if user is not find in JSON file
+            const loginError = validUsersList.some((user) => user.username === email && user.password === password )
+             return {
                     ...state, 
-                    isValidUser: isValidUser                   
+                    isValidUser: isValidUser,
+                    loginError:  !loginError                 
             }
         }
-        // case SWITCH_STATUS: {
-        //     return state.map( task => {
-        //         return task.id === action.payload ? {...task, completed :! task.completed} : task
-        //     })
-        // }
+       
         default: return state
     }
     

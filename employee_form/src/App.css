@@ -8,7 +8,16 @@ h1{
 form{
     max-width: 500px;
     width:100%;
-    margin:0 auto;
+    margin:5rem auto;
+    
+}
+.login-error{
+    position: absolute;
+    color:rgb(235, 54, 54);
+    top: 3%;
+    left: 42%;
+    margin: 15px auto;
+    font-size: 14px;
     
 }
 

@@ -3,6 +3,7 @@ import { EMPLOYEE_ENTRIES, TABLE_HEADERS } from '../actionTypes'
 import {users} from '../../utils/entries'
 import {header} from '../../utils/header'
 
+//setting users entries and headers for the table
 const initialState = {
     entries : users,
     headers : header

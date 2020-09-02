@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import '../stylesheets/table.css'
 
 function EmployeeTable(props) {
-   const headerFields = props.headers.map( (element) => (<th key={element}> {element.toUpperCase()}</th>))
+    const headerFields = props.headers.map( (element) => (<th key={element}> {element.toUpperCase()}</th>))
     
     const usersData = props.entries.map(user => {
         return (
@@ -35,7 +35,6 @@ function EmployeeTable(props) {
                     </tbody>
                 </table>
             </div>
-            {/* <button>Logout</button> */}
         </div>
     )
 }
